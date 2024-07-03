@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Name Page</title>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<center>
+    <section>
+        <form id="form" action="/submit" method="post">
+            <label for="fullname">First name:</label>
+            <input type="text" id="fullname" name="fullname"><br><br>
+            
+            <label for="bdate">Birthdate:</label>
+            <input type="date" id="bdate" name="bdate"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <p id="output" style="display:none;"></p>
+    </section>
+</center>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#form').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    data: {
+                        fullname: $('#fullname').val(),
+                        bdate: $('#bdate').val(),
+                    },
+                    type: 'POST',
+                    url: '/submit',
+                    success: function(data) {
+                        $('#output').text(`Hello my Name is ${data.fullname} \n and my Age is: ${data.age}`).show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
